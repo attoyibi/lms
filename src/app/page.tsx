@@ -1,15 +1,14 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button"
 import HeroSection from '@/features/landing/components/HeroSection';
+import CourseOfferSection from "@/features/landing/components/CourseOfferSection";
+import WhyChooseUsSection from "@/features/landing/components/WhyChooseUsSection";
+import FAQSection from "@/features/landing/components/FAQSection";
 export default function Home() {
   return (
-    <div>
+    <div className="container">
       <HeroSection />
-      <div
-        className="flex flex-col items-center justify-center align-center h-screen">
-        <Button
-        >Button 1</Button>
-      </div>
-    </div>
+      <CourseOfferSection />
+      <WhyChooseUsSection />
+      <FAQSection />
+    </div >
   );
 }
