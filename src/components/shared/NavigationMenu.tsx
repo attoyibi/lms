@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,26 @@ import { Button } from '@/components/ui/button';
 export default function NavigationMenu() {
     const [openContent, setOpenContent] = useState(false);
     const [openKomunitas, setOpenKomunitas] = useState(false);
+
+    const contentRef = useRef<HTMLDivElement>(null);
+    const komunitasRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (contentRef.current && !contentRef.current.contains(event.target as Node)) {
+                setOpenContent(false);
+            }
+            if (komunitasRef.current && !komunitasRef.current.contains(event.target as Node)) {
+                setOpenKomunitas(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
         <>
             <Link href="/" className="text-teal-600 hover:text-teal-700 font-medium ">
@@ -15,16 +35,16 @@ export default function NavigationMenu() {
                 Request Support
             </Link>
             {/* Program Dropdown - Placeholder */}
-            <div className="relative group">
+            <div className="relative group" ref={contentRef}>
                 <button
                     onClick={() => {
-                        setOpenKomunitas(!openKomunitas);
-                        setOpenContent(false);
+                        setOpenContent(!openContent);
+                        setOpenKomunitas(false);
                     }}
                     className="text-gray-600 hover:text-gray-800 flex items-center cursor-pointer transition-all duration-300">
                     Content
                     <svg
-                        className={`ml-1 h-4 w-4 transform transition-transform md:group-hover:rotate-180`}
+                        className={`ml-1 h-4 w-4 transform transition-transform md:group-hover:rotate-180 ${openContent ? 'rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -33,7 +53,7 @@ export default function NavigationMenu() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div className="sm:sticky md:absolute hidden group-hover:block w-48 bg-white border rounded-lg shadow-lg pt-2">
+                <div className={`sm:sticky md:absolute ${openContent ? 'block' : 'hidden'} md:group-hover:block w-48 bg-white border rounded-lg shadow-lg pt-2`}>
                     <Link href="https://youtu.be/tG9JXMa3ovI" className="block px-4 py-2 text-gray-600 hover:bg-gray-50">
                         RESTful API CRUD MockApi.io
                     </Link>
@@ -44,15 +64,20 @@ export default function NavigationMenu() {
                         Automation AI Development
                     </Link>
                 </div>
-            </div>
+            </div >
             {/* Komunitas Dropdown - Placeholder */}
-            <div className="relative group">
-                <button className="cursor-pointer text-gray-600 hover:text-gray-800 flex items-center">
+            < div className="relative group" ref={komunitasRef}>
+                <button
+                    onClick={() => {
+                        setOpenKomunitas(!openKomunitas);
+                        setOpenContent(false);
+                    }}
+                    className="cursor-pointer text-gray-600 hover:text-gray-800 flex items-center">
                     Komunitas
-                    <svg className="ml-1 h-4 w-4 transform transition-transform md:group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg className={`ml-1 h-4 w-4 transform transition-transform md:group-hover:rotate-180 ${openKomunitas ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 {/* Dropdown content here */}
-                <div className="sm:sticky md:absolute hidden group-hover:block w-48 bg-white border rounded-lg shadow-lg pt-2">
+                <div className={`sm:sticky md:absolute ${openKomunitas ? 'block' : 'hidden'} md:group-hover:block w-48 bg-white border rounded-lg shadow-lg pt-2`}>
                     <Link href="https://www.youtube.com/@muhammadmuchson6543" className="block px-4 py-2 text-gray-600 hover:bg-gray-50">
                         Youtube
                     </Link>
@@ -63,7 +88,7 @@ export default function NavigationMenu() {
                         Whatsapp
                     </Link>
                 </div>
-            </div>
+            </div >
             {/* <Link href="/kontak" className="text-gray-600 hover:text-gray-800">
                         Kontak
                     </Link> */}
