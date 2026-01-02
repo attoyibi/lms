@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'; // Import useState dan useEf
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
+import { Sheet, SheetTrigger, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import NavigationMenu from './NavigationMenu';
 // import { * asSheetPrimitive } from '@radix-ui/react-dialog';
@@ -57,15 +57,14 @@ export default function Navbar() {
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-[250px]">
+                            <SheetTitle>Menu</SheetTitle>
                             <div className="space-y-4 mt-4 p-4 flex flex-col">
                                 <NavigationMenu />
                             </div>
                         </SheetContent>
                     </Sheet>
                 </div>
-
             </div>
-
         </nav>
     );
 }

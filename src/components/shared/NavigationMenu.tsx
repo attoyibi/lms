@@ -94,12 +94,16 @@ export default function NavigationMenu() {
                     </Link> */}
             {/* Buttons Section */}
             <div className="flex items-center space-x-4">
-                <Button variant="outline" className="cursor-pointer border-teal-500 text-teal-500 hover:bg-teal-50 hover:text-teal-600">
-                    Daftar
-                </Button>
-                <Button className="cursor-pointer bg-teal-600 text-white hover:bg-teal-700">
-                    Masuk
-                </Button>
+                <Link href="/register">
+                    <Button variant="outline" className="cursor-pointer border-teal-500 text-teal-500 hover:bg-teal-50 hover:text-teal-600">
+                        Daftar
+                    </Button>
+                </Link>
+                <Link href="/login">
+                    <Button className="cursor-pointer bg-teal-600 text-white hover:bg-teal-700">
+                        Masuk
+                    </Button>
+                </Link>
             </div>
         </ >
     )
