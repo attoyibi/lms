@@ -1,3 +1,16 @@
+/**
+ * GeneralLandingChatbot Component
+ * * This component renders the floating action button (FAB) and the chat interface
+ * specifically for the landing page. 
+ * * PURPOSE:
+ * - To provide general information about the website and "Muchson Course".
+ * - To answer FAQs regarding services, pricing, or general inquiries.
+ * * NOTE: 
+ * This is NOT the specific Learning Management System (LMS) AI Chatbot 
+ * found within the Course menu. This is intended for guest users and 
+ * general landing page visitors.
+ */
+
 "use client";
 
 import React, { useState } from 'react';
